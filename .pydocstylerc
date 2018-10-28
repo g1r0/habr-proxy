@@ -1,0 +1,7 @@
+[pydocstyle]
+inherit = false
+ignore =
+    D100,  # Missing docstring in public module
+    D104,  # Missing docstring in public package
+    D211,  # No blank lines allowed before class docstring
+    D213,  # Multi-line docstring summary should start at the second line

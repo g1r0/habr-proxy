@@ -1,0 +1,27 @@
+version.conf
+
+# dev specificIDE specific files
+.idea/*
+.ropeproject/*
+.codeintel/*
+.project
+.pydevproject
+.settings
+.vscode
+.coverage
+*.log
+live_settings.conf
+
+# python specific
+*.pyc
+__pycache__/
+
+# setuptools specific
+.eggs
+dist
+
+# Sphinx
+docs/_build
+docs/api
+
+.ci
