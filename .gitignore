@@ -15,6 +15,7 @@ live_settings.conf
 # python specific
 *.pyc
 __pycache__/
+.mypy_cache
 
 # setuptools specific
 .eggs
@@ -25,3 +26,7 @@ docs/_build
 docs/api
 
 .ci
+
+# project specific
+mitmproxy-ca*
+mitmproxy-dh*
