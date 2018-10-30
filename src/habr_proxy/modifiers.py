@@ -56,8 +56,8 @@ class UrlTransformHtmlAction(BaseTransformAction):
     def transform(self) -> str:
         """Modify links in HTML content to stay at habr-proxy."""
         options = dict(ctx.options.items())
-        host, port = options['listen_host'], options['listen_port']
-        replace_str = f'http://{host.value}:{port.value}'
+        port = options['listen_port']
+        replace_str = f'http://127.0.0.1:{port.value}'
 
         links = self.soup.find_all('a')
         for link in links:

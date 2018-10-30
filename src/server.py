@@ -1,5 +1,5 @@
 # coding: utf-8
-import pathlib
+import os
 
 from mitmproxy import options
 from mitmproxy.tools.dump import DumpMaster
@@ -12,7 +12,13 @@ from habr_proxy.modifiers import TmTransformHtmlAction
 from habr_proxy.modifiers import UrlTransformHtmlAction
 
 
-CONFIG_DIR = pathlib.Path(__file__).cwd().joinpath('..', 'config').as_posix()
+CONFIG_DIR_VAR = 'PROXY_CONFIG_DIR'
+
+CONFIG_PATH = os.environ.get(CONFIG_DIR_VAR, None)
+if CONFIG_PATH is None:
+    raise ValueError(
+        'Environment variable %s not found.' % CONFIG_DIR_VAR
+    )
 
 
 class HabrDumpMaster(DumpMaster):
@@ -36,4 +42,4 @@ class HabrDumpMaster(DumpMaster):
 
 
 if __name__ == "__main__":
-    proxy = run(HabrDumpMaster, cmdline.mitmdump, ('--confdir', CONFIG_DIR))
+    proxy = run(HabrDumpMaster, cmdline.mitmdump, ('--confdir', CONFIG_PATH))
