@@ -1,5 +1,4 @@
 # coding: utf-8
 
-beautifulsoup4==4.6.3
 mitmproxy==4.0.4
 tornado==5.1.1
