@@ -4,12 +4,12 @@ _________________
 Habr-proxy project has been done for the `test challenge #1
 <https://github.com/ivelum/job/blob/master/code_challenges/python.md>`_.
 
-Assamptions
+Assumptions
 _________________
 
 * Service will be run locally. No remotes.
 * Proxy is available at ``http://127.0.0.1:8080``.
-* Demo can be run with local environment or docker image
+* Demo can be run with local environment or docker image.
 
 What was used
 _________________
@@ -17,6 +17,7 @@ _________________
 * Python 3.6
 * Mitmproxy
 * Docker
+* Pytest
 
 How to run demo
 _________________
@@ -46,3 +47,18 @@ Local python environment
  python src/server.py
 
 Proxy is now available at ``http://127.0.0.1:8080``.
+
+How to run tests
+________________
+1. Setup Python 3.6 environment and install dependencies for ``requirements/prod.txt``:
+
+::
+
+ pip install -r requirements/prod.txt
+
+
+2. Run Pytest with command:
+
+::
+
+ pytest
