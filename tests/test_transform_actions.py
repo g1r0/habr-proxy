@@ -47,6 +47,16 @@ class TestTmTransform:
             ('noedit@nochange', 'noedit@nochange'),
             ('Семёно', 'Семёно™'),
             ('ch1nge', 'ch1nge'),
+            ('(change)', '(change™)'),
+            ('"change"', '"change™"'),
+            ("'change'", "'change™'"),
+            ('`change`', '`change™`'),
+            ('[change]', '[change™]'),
+            ('{change}', '{change™}'),
+            ('[change/change]', '[change™/change™]'),
+            (r'[change\change]', r'[change™\change™]'),
+            ('«change»', '«change™»'),
+            ('« change »', '« change™ »'),
         )
 
         verify_test_data(action=self.action, data=test_sets)

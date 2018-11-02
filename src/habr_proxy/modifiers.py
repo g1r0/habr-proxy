@@ -20,12 +20,14 @@ def get_tm_transform_re() -> Pattern[AnyStr]:
     word = r'([^\W\d_]{6})'
 
     # negative look ahead
-    no_word_continue = r'[^\s<]+'
+    could_have_close_wrappers = r'\)\]\}\'\"`»/\\'
+    no_word_continue = f'[^\\s<{could_have_close_wrappers}]+'
     no_close_tag = r'[^<]*>'
     negative_ahead = f'(?!{no_word_continue}|{no_close_tag})'
 
     # negative look behind
-    no_word_begin = r'[^\s>]{1}'
+    could_have_open_wrappers = r'\(\[\{\'\"`«/\\'
+    no_word_begin = f'[^\\s>{could_have_open_wrappers}]{{1}}'
     no_open_tag = r'<'
     negative_behind = f'(?<!{no_word_begin}|{no_open_tag})'
 
