@@ -42,13 +42,13 @@ class TestTmTransform:
             ('change', 'change™'),
             ('nochange', 'nochange'),
             ('nochangenochange', 'nochangenochange'),
-            ('noedit-nochange', 'noedit-nochange'),
-            ('noedit.nochange', 'noedit.nochange'),
-            ('noedit@nochange', 'noedit@nochange'),
             ('Семёно', 'Семёно™'),
             ('ch1nge', 'ch1nge'),
+
+            # enclosing literals
             ('(change)', '(change™)'),
             ('"change"', '"change™"'),
+            ('”change”', '”change™”'),
             ("'change'", "'change™'"),
             ('`change`', '`change™`'),
             ('[change]', '[change™]'),
@@ -57,6 +57,26 @@ class TestTmTransform:
             (r'[change\change]', r'[change™\change™]'),
             ('«change»', '«change™»'),
             ('« change »', '« change™ »'),
+
+            # delimiters
+            ('noedit-nochange', 'noedit-nochange'),
+            ('noedit@nochange', 'noedit@nochange'),
+            # .
+            ('noedit.nochange', 'noedit.nochange'),
+            ('change. nochange', 'change™. nochange'),
+            ('change.<nochange>', 'change™.<nochange>'),
+            # ,
+            ('noedit,nochange', 'noedit,nochange'),
+            ('change, nochange', 'change™, nochange'),
+            ('change,<nochange>', 'change™,<nochange>'),
+            # :
+            ('noedit:nochange', 'noedit:nochange'),
+            ('change: nochange', 'change™: nochange'),
+            ('change:<nochange>', 'change™:<nochange>'),
+            # ;
+            ('noedit;nochange', 'noedit;nochange'),
+            ('change; nochange', 'change™; nochange'),
+            ('change;<nochange>', 'change™;<nochange>'),
         )
 
         verify_test_data(action=self.action, data=test_sets)

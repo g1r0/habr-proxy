@@ -20,16 +20,20 @@ def get_tm_transform_re() -> Pattern[AnyStr]:
     word = r'([^\W\d_]{6})'
 
     # negative look ahead
-    could_have_close_wrappers = r'\)\]\}\'\"`»/\\'
-    no_word_continue = f'[^\\s<{could_have_close_wrappers}]+'
-    no_close_tag = r'[^<]*>'
-    negative_ahead = f'(?!{no_word_continue}|{no_close_tag})'
+    delimiters = r'.,:;'
+    close_literals = r'\)\]\}\'\”\"`»/\\'
+
+    word_continue = f'[^\\s<{close_literals}{delimiters}]+'
+    close_tag = r'[^<]*?>'
+    word_delimiter = f'[{delimiters}][^\\s<]+'
+    negative_ahead = f'(?!{word_continue}|{close_tag}|{word_delimiter})'
 
     # negative look behind
-    could_have_open_wrappers = r'\(\[\{\'\"`«/\\'
-    no_word_begin = f'[^\\s>{could_have_open_wrappers}]{{1}}'
-    no_open_tag = r'<'
-    negative_behind = f'(?<!{no_word_begin}|{no_open_tag})'
+    open_literals = r'\(\[\{\'\”\"`«/\\'
+
+    word_begin = f'[^\\s>{open_literals}]{{1}}'
+    open_tag = r'<'
+    negative_behind = f'(?<!{word_begin}|{open_tag})'
 
     return re.compile(f'{negative_behind}{word}{negative_ahead}', re.DOTALL)
 
